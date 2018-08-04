@@ -4,18 +4,48 @@
 }
 html, body{
     height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 header {
-    z-index: 3;
+    z-index: 5;
     position: fixed;
     top: 0;
     background-color: red;
     width: 100%;
 }
+header > h1 {
+    float: left;
+    margin: 10px;
+}
+.navItem {
+    float: right;
+    margin: 20px 10px;
+    font-size: 1em;
+    font-weight: bold;
+}
 .mainSection{
     width: 100%;
     height: 100vh;
     z-index: 2;
+    position: relative;
+    padding-top: 62px;
+    padding-bottom: 338px;
+}
+.scroll-button{
+    width: 200px;
+    height: 100px;
+    opacity: .7;
+    display: flex;
+    position: absolute; 
+    left: 50%;
+    bottom: 10%;
+    transform: translateX(-50%);
+    z-index: 4;
+}
+.scroll-button > img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
 }
 #home-section-video{
     width: 100%;
