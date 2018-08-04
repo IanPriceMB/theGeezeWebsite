@@ -18,15 +18,20 @@
     </header>
     <section class='mainSection' id='home-section'>
         <iframe id='home-section-video' src="https://www.youtube.com/embed/dM9DSbp1P8A?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=dM9DSbp1P8A" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        <a class='scroll-button' href="#twitch-section" id='twitch-scroll-button'><img src='pictures/interface/scrollImg.png' alt="scroll button"></a>
+        <div class='scroll-button'onClick="document.getElementById('twitch-section').scrollIntoView({behavior: 'smooth', block: 'start'});" id='twitch-scroll-button'>
+            <img src='pictures/interface/scrollImg.png' alt="scroll button">
+        </div>
     </section>
     <section class='mainSection' id='twitch-section'>
         <div id="twitch-embed"></div>
-        <a class='scroll-button' href="#youtube-section" id='youtube-scroll-button'><img src='pictures/interface/scrollImg.png' alt="scroll button"></a>
+        <div class='scroll-button'onClick="document.getElementById('youtube-section').scrollIntoView({behavior: 'smooth', block: 'start'});" id='youtube-scroll-button'>
+            <img src='pictures/interface/scrollImg.png' alt="scroll button">
+        </div>
     </section>
     <section class='mainSection' id='youtube-section'>
-
-        <a class='scroll-button' href="#store-section" id='store-scroll-button'><img src='pictures/interface/scrollImg.png' alt="scroll button"></a>
+        <div class='scroll-button'onClick="document.getElementById('store-section').scrollIntoView({behavior: 'smooth', block: 'start'});" id='store-scroll-button'>
+            <img src='pictures/interface/scrollImg.png' alt="scroll button">
+        </div>
     </section>
     <section class='mainSection' id='store-section'>
 

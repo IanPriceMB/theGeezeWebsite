@@ -32,15 +32,19 @@ header > h1 {
     padding-bottom: 338px;
 }
 .scroll-button{
-    width: 200px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     opacity: .7;
+    border-radius: 50%;
     display: flex;
     position: absolute; 
     left: 50%;
-    bottom: 10%;
+    bottom: 40%;
     transform: translateX(-50%);
     z-index: 4;
+}
+.scroll-button:hover {
+    background-color: rgb(37, 37, 48);
 }
 .scroll-button > img {
     max-width: 100%;
