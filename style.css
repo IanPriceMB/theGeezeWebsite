@@ -30,7 +30,7 @@ header > h1 {
 .mainSection{
     width: 100%;
     height: 92vh;
-    z-index: 2;
+    z-index: 3;
     position: relative;
     padding-top: 62px;
     padding-bottom: 338px;
@@ -42,7 +42,7 @@ header > h1 {
     width: 100px;
     height: 100px;
     opacity: .7;
-    background-color: rgb(37, 37, 48);
+    background-color: rgb(20, 20, 24);
     border-radius: 50%;
     display: flex;
     position: absolute; 
@@ -61,5 +61,8 @@ header > h1 {
 }
 #home-section-video{
     width: 100%;
-    height: 100vh;
+    height: 92vh;
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%);
 }
