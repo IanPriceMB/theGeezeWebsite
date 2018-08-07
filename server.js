@@ -15,6 +15,17 @@ db.on("error", function(error) {
 
 app.use('/geeze', express.static(__dirname + '/public/'));
 
+app.get("/geeze/videos", function(req, res) {
+  db.geezeVideos.find({}, function(error, found) {
+    if (error) {
+      console.log(error);
+    }
+    else {
+      res.json(found);
+    }
+  });
+});
+
 app.get("*", function(req, res) {
   res.redirect('/geeze')
 });
