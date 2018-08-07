@@ -75,3 +75,6 @@ header > h1 {
     transform: translateX(-50%);
     z-index: 4;
 }
+.youtube-section{
+    color: white;
+}

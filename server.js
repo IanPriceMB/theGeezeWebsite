@@ -43,10 +43,6 @@ request("https://www.youtube.com/channel/UCbpeUIK9EQohTXRxYmbBFXw/videos", funct
     var title = $(element).text();
     var link = $(element).attr("href");
 
-    console.log('title'+title);
-    console.log('link'+link);
-
-
     if (title && link) {
       db.geezeVideos.findOne({
         title: title
