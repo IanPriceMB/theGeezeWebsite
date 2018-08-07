@@ -1,41 +1,71 @@
+var express = require("express");
+var mongojs = require("mongojs");
 var cheerio = require("cheerio");
 var request = require("request");
-// First, tell the console what server.js is doing
+
+var app = express();
+var databaseUrl = "theGeeze";
+var collections = ["geezeVideos"];
+
+
+var db = mongojs(databaseUrl, collections);
+db.on("error", function(error) {
+  console.log("Database Error:", error);
+});
+
+app.use('/geeze', express.static(__dirname + '/public/'));
+
+app.get("*", function(req, res) {
+  res.redirect('/geeze')
+});
+
 console.log("\n***********************************\n" +
-            "Grabbing every thread name and link\n" +
-            "from reddit's webdev board:" +
+            "Grabbing Geeze videos\n" +
             "\n***********************************\n");
 
-// Making a request for reddit's "webdev" board. The page's HTML is passed as the callback's third argument
 request("https://www.youtube.com/channel/UCbpeUIK9EQohTXRxYmbBFXw/videos", function(error, response, html) {
-
-  // Load the HTML into cheerio and save it to a variable
-  // '$' becomes a shorthand for cheerio's selector commands, much like jQuery's '$'
+  
   var $ = cheerio.load(html);
 
-  // An empty array to save the data that we'll scrape
-  var results = [];
-
-  // With cheerio, find each p-tag with the "title" class
-  // (i: iterator. element: the current element)
   $("a[title~='Geeze']").each(function(i, element) {
-      console.log(i)
-      console.log(element)
-      console.log('-----------------')
-    // Save the text of the element in a "title" variable
-    // var title = $(element).text();
 
-    // // In the currently selected element, look at its child elements (i.e., its a-tags),
-    // // then save the values for any "href" attributes that the child elements may have
-    // var link = $(element).children().attr("href");
+    var title = $(element).text();
+    var link = $(element).attr("href");
 
-    // // Save these results in an object that we'll push into the results array we defined earlier
-    // results.push({
-    //   title: title,
-    //   link: link
-    // });
+    console.log('title'+title);
+    console.log('link'+link);
+
+
+    if (title && link) {
+      db.geezeVideos.findOne({
+        title: title
+      },
+      function(err, found) {
+        if (err) {
+          console.log(err);
+        }
+        else if (!(found === null)) {
+          console.log('found'+found)
+        }
+        else if (found === null) {
+          db.geezeVideos.insert({
+            title: title,
+            link: link
+          },
+          function(err, inserted) {
+            if (err) {
+              console.log(err);
+            }
+            else {
+              console.log('inserted'+inserted)
+            }
+          })
+        }
+      });
+    }
   });
+});
 
-  // Log the results once you've looped through each of the elements found with cheerio
-//   console.log(results[0]);
+app.listen(3000, function() {
+  console.log("App running on port 3000!");
 });
