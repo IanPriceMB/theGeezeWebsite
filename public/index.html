@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="style/style.css"/>
     <title>The Geeze</title>
 </head>
-<body>
+<body  onresize="twitchSize()">
     <header id="header">
         <h1>The Geeze</h1>
         <item class='navItem' onClick="document.getElementById('dickNeedles-section').scrollIntoView({behavior: 'smooth', block: 'start'});" id='dickNeedles-link'>Dick Needles</item>
@@ -18,6 +18,7 @@
         <item class='navItem' onClick="document.getElementById('home-section').scrollIntoView({behavior: 'smooth', block: 'start'});" id='home-link'>Home</item>
     </header>
     <section class='mainSection' id='home-section'>
+        <div class="screen"></div>
         <iframe id='home-section-video' src="https://www.youtube.com/embed/dM9DSbp1P8A?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=dM9DSbp1P8A" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <div class='scroll-button'onClick="document.getElementById('twitch-section').scrollIntoView({behavior: 'smooth', block: 'start'});" id='twitch-scroll-button'>
             <img src='pictures/interface/scrollImg.png' alt="scroll button">
@@ -44,7 +45,6 @@
             <div onClick="document.getElementById('home-section').scrollIntoView({behavior: 'smooth', block: 'start'});">Return to top of page</div>
         </footer>
     </section>
-
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
     <script src="scripts/scripts.js" ></script>
 </body>

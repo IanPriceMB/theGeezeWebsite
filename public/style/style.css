@@ -8,7 +8,7 @@ html, body{
     padding: 0;
 }
 header {
-    z-index: 5;
+    z-index: 7;
     position: fixed;
     top: 0;
     background-color: red;
@@ -26,6 +26,14 @@ header > h1 {
 }
 #dickNeedles-link{
     margin-right: 50px;
+}
+.screen{
+    background-color: black;
+    opacity: .8;
+    width: 100%;
+    height: 92vh;
+    z-index: 5;
+    position: absolute; 
 }
 .mainSection{
     width: 100%;
@@ -49,7 +57,7 @@ header > h1 {
     left: 50%;
     bottom: 30%;
     transform: translateX(-50%);
-    z-index: 4;
+    z-index: 6;
 }
 .scroll-button:hover {
     background-color: rgb(160, 160, 170);
@@ -65,4 +73,5 @@ header > h1 {
     position: absolute; 
     left: 50%;
     transform: translateX(-50%);
+    z-index: 4;
 }
