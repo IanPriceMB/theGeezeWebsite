@@ -35,9 +35,24 @@ window.onload = function() {
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == XMLHttpRequest.DONE) { 
       if (xmlhttp.status == 200) {
-        console.log(xmlhttp)
-        console.log(xmlhttp.responseText)
-        document.getElementById("youtube-section").innerHTML = xmlhttp.responseText;
+        const data = JSON.parse(xmlhttp.response);
+
+        for(let i=0;i<data.length;i++){
+          const title = data[i].title;
+          const link = data[i].link.slice(9, data[i].link.length);
+          const url = 'https://www.youtube.com/embed/' + link; //+ '?'
+          let iframe = document.createElement('IFRAME');
+          document.getElementById('youtube-section').appendChild(iframe)
+          iframe.classList.add('youtube-video')
+          iframe.setAttribute('id', 'youtube-video'+i)
+          iframe.setAttribute('src', url)
+          iframe.setAttribute('frameborder', "0")
+          iframe.setAttribute('allow', "autoplay; encrypted-media")
+          iframe.setAttribute('allowfullscreen', true)
+
+
+        }
+
       }
       else if (xmlhttp.status == 400) {
         alert('There was an error 400');
