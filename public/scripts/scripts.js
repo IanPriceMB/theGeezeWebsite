@@ -4,6 +4,26 @@ let headerHeight;
 let useableHeight;
 let useableWidth;
 
+//all the functions that need to run when the page loads
+window.onload = function() {
+  //adding the auto scroll function to the page
+  addScroll();
+  //get the screen size so that twitch will load properly
+  screenSize();
+  //create a new twitch player that is the right size
+    new Twitch.Embed("twitch-embed", {
+    width: useableWidth,
+    height: useableHeight,
+    theme: 'dark',
+    channel: "the_geeze"
+  });
+  //getting my youtube videos
+  ajaxCall();  
+
+}
+
+//handle the math for dynamically siznig twitch feed
+//does width minus scroll bar and height minus header
 function screenSize() {
   width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
   height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -12,6 +32,8 @@ function screenSize() {
   useableWidth = width-18;
 }
 
+// tied to body in html
+//this will resize twitch feed when the window is resized
 function scalingSize() {
   
   document.getElementById('twitch-embed').innerHTML = "";
@@ -26,17 +48,25 @@ function scalingSize() {
   });
 }
 
-window.onload = function() {
-  
-  screenSize();
+//this is supposed to make the currently viewed youtube video the big on it the grid
+//this is not working
+function mainVideo() {
+  console.log(this)
+  if (!this.classList.contains("main-video")){
+    var nodes = document.getElementById('video-section').childNodes;
 
-  new Twitch.Embed("twitch-embed", {
-    width: useableWidth,
-    height: useableHeight,
-    theme: 'dark',
-    channel: "the_geeze"
-  });
+    for(var i=0; i<nodes.length; i++) {
+      if (nodes[i].classList.contains('main-video')) {
+        nodes[i].classList.remove('main-video')
+      }
+    }
 
+    this.classList.add('main-video')
+  }
+}
+
+//this makes and ajax call to get the videos from the database
+function ajaxCall() {
   const xmlhttp = new XMLHttpRequest();
   const currentURL = window.location.origin;
 
@@ -63,7 +93,7 @@ window.onload = function() {
           iframe.setAttribute('frameborder', "0")
           iframe.setAttribute('allow', "autoplay; encrypted-media")
           iframe.setAttribute('allowfullscreen', true)
-          iframe.setAttribute('onClick', 'mainVideo()')
+          iframe.setAttribute('onclick', 'mainVideo()')
           
           if (i===0) {
             iframe.classList.add('main-video')
@@ -82,18 +112,20 @@ window.onload = function() {
   xmlhttp.send();
 }
 
-function mainVideo(event) {
-  event.preventDefault();
+// this is for adding an on click scroll leven to nav items and scroll buttons
+function autoScroll(location) {
+  document.getElementById(location).scrollIntoView({behavior: 'smooth', block: 'start'})
+}
 
-  if (!this.classList.contains("main-video")){
-    var nodes = document.getElementById('video-section').childNodes;
-
-    for(var i=0; i<nodes.length; i++) {
-      if (nodes[i].classList.contains('main-video')) {
-        nodes[i].classList.remove('main-video')
-      }
-    }
-
-    this.classList.add('main-video')
+//this is for adding the auto scroll function to the right elements
+function addScroll() {
+  const navItems = document.getElementsByClassName("navItem");
+  const scrollButtons = document.getElementsByClassName("scroll-button");
+  
+  for(let i =0; i < navItems.length; i++) {
+    navItems[i].setAttribute('onclick', 'autoScroll("'+navItems[i].attributes[1].nodeValue+'")')
+  }
+  for(let i =0; i < scrollButtons.length; i++) {
+    scrollButtons[i].setAttribute('onclick', 'autoScroll("'+scrollButtons[i].attributes[1].nodeValue+'")')
   }
 }
