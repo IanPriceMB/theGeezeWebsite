@@ -4,10 +4,9 @@ var cheerio = require("cheerio");
 var request = require("request");
 
 var app = express();
+
 var databaseUrl = "theGeeze";
 var collections = ["geezeVideos"];
-
-
 var db = mongojs(databaseUrl, collections);
 db.on("error", function(error) {
   console.log("Database Error:", error);
@@ -18,7 +17,7 @@ app.use('/geeze', express.static(__dirname + '/public/'));
 app.get("/geeze/videos", function(req, res) {
   db.geezeVideos.find({}, function(error, found) {
     if (error) {
-      console.log(error);
+      console.log('err '+error);
     }
     else {
       res.json(found);
@@ -49,10 +48,10 @@ request("https://www.youtube.com/channel/UCbpeUIK9EQohTXRxYmbBFXw/videos", funct
       },
       function(err, found) {
         if (err) {
-          console.log(err);
+          console.log('err '+err);
         }
         else if (!(found === null)) {
-          console.log('found'+found)
+          console.log('found '+found)
         }
         else if (found === null) {
           db.geezeVideos.insert({
@@ -61,10 +60,10 @@ request("https://www.youtube.com/channel/UCbpeUIK9EQohTXRxYmbBFXw/videos", funct
           },
           function(err, inserted) {
             if (err) {
-              console.log(err);
+              console.log('err '+err);
             }
             else {
-              console.log('inserted'+inserted)
+              console.log('inserted '+inserted)
             }
           })
         }
