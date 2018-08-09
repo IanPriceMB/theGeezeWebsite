@@ -51,32 +51,25 @@ function scalingSize() {
 //this is supposed to make the currently viewed youtube video the big on it the grid
 //this is not perfect but it's decent
 function mainVideo(thing) {
-  //some delay so it feels better
-  setTimeout(() => {
-    //only trigger if you are hovering a small video and not a video that's been the main video recently
-    if (!thing.classList.contains("main-video") && !thing.classList.contains('just')){
-      //variables
-      var nodes = document.getElementById('video-section').childNodes;
-      var justNode;
-      //handle the classes
-      for(var i=0; i<nodes.length; i++) {
-        if (nodes[i].classList.contains('main-video')) {
-          nodes[i].classList.remove('main-video')
-          nodes[i].classList.add('just')
-          //by indicating the single node with the just class the timeout for removing it later doesn't remove all instances of just at once
-          if (nodes[i].classList.contains('just')){
-            justNode = nodes[i];
-          }
-        }
-      }
-      //create the new main video
-      thing.classList.add('main-video');
-      //remove the just class from the most recent main video so that it can be main again if so chosen
-      setTimeout(function(){
-        justNode.classList.remove('just')
-      }, 3000);
+  console.log(thing.attributes[1])
+  //variables
+  var nodes = document.getElementById('video-section').childNodes;
+  //handle the classes
+  for(var i=0; i<nodes.length; i++) {
+    if (nodes[i].classList.contains('main-video')) {
+      var parent = document.getElementById('video-section');
+      parent.removeChild(nodes[i])
     }
-  }, 500);
+    const mainVideo = document.createElement('IFRAME');
+
+    document.getElementById('video-section').appendChild(mainVideo)
+
+    mainVideo.classList.add('main-video');
+    mainVideo.setAttribute('src', thing.getAttribute('data-url')+'?autoplay=1')
+    mainVideo.setAttribute('frameborder', "0")
+    mainVideo.setAttribute('allow', "autoplay; encrypted-media")
+    mainVideo.setAttribute('allowfullscreen', true)
+  } 
 };
 
 //this makes and ajax call to get the videos from the database
@@ -92,7 +85,7 @@ function ajaxCall() {
 
         const data = JSON.parse(xmlhttp.response);
 
-        for(let i=0;i<8;i++){
+        for(let i=0;i<9;i++){
           const link = data[i].link.slice(9, data[i].link.length);
           const url = 'https://www.youtube.com/embed/' + link; //+ '?'
 
@@ -100,17 +93,18 @@ function ajaxCall() {
           const screen = document.createElement('DIV');
   
           document.getElementById('video-section').appendChild(iframe)
+          document.getElementById('video-section').appendChild(screen)
  
           iframe.classList.add('youtube-video')
-          iframe.setAttribute('id', 'youtube-video'+i)
+          iframe.classList.add('youtube-video'+i)
           iframe.setAttribute('src', url)
           iframe.setAttribute('frameborder', "0")
           iframe.setAttribute('allow', "autoplay; encrypted-media")
-          iframe.setAttribute('allowfullscreen', true)
-          iframe.setAttribute('onmouseenter', 'mainVideo(this)')
-
+          
+          screen.setAttribute('onclick', 'mainVideo(this)')
+          screen.setAttribute('data-url', url)
           screen.classList.add('youtube-video-screen')
-
+          screen.classList.add('youtube-video-screen'+i)
         }
       }
       else if (xmlhttp.status == 400) {
@@ -142,7 +136,6 @@ function addScroll() {
     scrollButtons[i].setAttribute('onclick', 'autoScroll("'+scrollButtons[i].attributes[1].nodeValue+'")')
   }
 };
-
 //fancy scrolling effect
 function parallax() {
   var parallax = document.getElementById('images');
