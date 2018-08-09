@@ -92,12 +92,12 @@ function ajaxCall() {
 
         const data = JSON.parse(xmlhttp.response);
 
-        for(let i=0;i<9;i++){
-          const title = data[i].title;
+        for(let i=0;i<8;i++){
           const link = data[i].link.slice(9, data[i].link.length);
           const url = 'https://www.youtube.com/embed/' + link; //+ '?'
 
           const iframe = document.createElement('IFRAME');
+          const screen = document.createElement('DIV');
   
           document.getElementById('video-section').appendChild(iframe)
  
@@ -109,9 +109,8 @@ function ajaxCall() {
           iframe.setAttribute('allowfullscreen', true)
           iframe.setAttribute('onmouseenter', 'mainVideo(this)')
 
-          if (i===0) {
-            iframe.classList.add('main-video')
-          }
+          screen.classList.add('youtube-video-screen')
+
         }
       }
       else if (xmlhttp.status == 400) {
@@ -144,6 +143,9 @@ function addScroll() {
   }
 };
 
-function thisHere(thing) {
-  console.log(thing);
-};
+//fancy scrolling effect
+function parallax() {
+  var parallax = document.getElementById('images');
+  parallax.style.top = -(window.pageYOffset / 4)+ 'px';
+}
+window.addEventListener('scroll', parallax, false);

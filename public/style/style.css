@@ -6,6 +6,7 @@ html, body{
     height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
+    background-color: black;
 }
 header {
     z-index: 7;
@@ -37,6 +38,16 @@ nav{
     margin-bottom: 500px;
     background-color: black;
 }
+#images{
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+.parallax {
+    width: 30vw;
+    position: relative;
+}
+
 .scroll-button{
     width: 100px;
     height: 100px;
@@ -86,8 +97,8 @@ section > a > img {
     z-index: 2;
     position: absolute; 
 }
-#dickNeedles-section {
-    padding-bottom: 0;
+#about-section {
+    margin-bottom: 0;
 }
 #youtube-section > a {
     text-decoration: none;
@@ -107,6 +118,14 @@ section > a > img {
 .youtube-video{
     width: 100%;
     height: 100%;
+    z-index: 1;
+}
+.youtube-video-screen {
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: black;
+    opacity: .8;
 }
 .main-video {
     width: 100%;
