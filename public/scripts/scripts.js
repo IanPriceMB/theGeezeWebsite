@@ -30,7 +30,7 @@ function screenSize() {
   headerHeight = Math.max(document.getElementById('header').clientHeight || 0);
   useableHeight = height - headerHeight;
   useableWidth = width-18;
-}
+};
 
 // tied to body in html
 //this will resize twitch feed when the window is resized
@@ -46,24 +46,38 @@ function scalingSize() {
     theme: 'dark',
     channel: "the_geeze"
   });
-}
+};
 
 //this is supposed to make the currently viewed youtube video the big on it the grid
-//this is not working
-function mainVideo() {
-  console.log(this)
-  if (!this.classList.contains("main-video")){
-    var nodes = document.getElementById('video-section').childNodes;
-
-    for(var i=0; i<nodes.length; i++) {
-      if (nodes[i].classList.contains('main-video')) {
-        nodes[i].classList.remove('main-video')
+//this is not perfect but it's decent
+function mainVideo(thing) {
+  //some delay so it feels better
+  setTimeout(() => {
+    //only trigger if you are hovering a small video and not a video that's been the main video recently
+    if (!thing.classList.contains("main-video") && !thing.classList.contains('just')){
+      //variables
+      var nodes = document.getElementById('video-section').childNodes;
+      var justNode;
+      //handle the classes
+      for(var i=0; i<nodes.length; i++) {
+        if (nodes[i].classList.contains('main-video')) {
+          nodes[i].classList.remove('main-video')
+          nodes[i].classList.add('just')
+          //by indicating the single node with the just class the timeout for removing it later doesn't remove all instances of just at once
+          if (nodes[i].classList.contains('just')){
+            justNode = nodes[i];
+          }
+        }
       }
+      //create the new main video
+      thing.classList.add('main-video');
+      //remove the just class from the most recent main video so that it can be main again if so chosen
+      setTimeout(function(){
+        justNode.classList.remove('just')
+      }, 3000);
     }
-
-    this.classList.add('main-video')
-  }
-}
+  }, 500);
+};
 
 //this makes and ajax call to get the videos from the database
 function ajaxCall() {
@@ -93,8 +107,8 @@ function ajaxCall() {
           iframe.setAttribute('frameborder', "0")
           iframe.setAttribute('allow', "autoplay; encrypted-media")
           iframe.setAttribute('allowfullscreen', true)
-          iframe.setAttribute('onclick', 'mainVideo()')
-          
+          iframe.setAttribute('onmouseenter', 'mainVideo(this)')
+
           if (i===0) {
             iframe.classList.add('main-video')
           }
@@ -110,12 +124,12 @@ function ajaxCall() {
   };  
   xmlhttp.open("GET", currentURL+"/geeze/videos", true);
   xmlhttp.send();
-}
+};
 
 // this is for adding an on click scroll leven to nav items and scroll buttons
 function autoScroll(location) {
   document.getElementById(location).scrollIntoView({behavior: 'smooth', block: 'start'})
-}
+};
 
 //this is for adding the auto scroll function to the right elements
 function addScroll() {
@@ -128,4 +142,8 @@ function addScroll() {
   for(let i =0; i < scrollButtons.length; i++) {
     scrollButtons[i].setAttribute('onclick', 'autoScroll("'+scrollButtons[i].attributes[1].nodeValue+'")')
   }
-}
+};
+
+function thisHere(thing) {
+  console.log(thing);
+};

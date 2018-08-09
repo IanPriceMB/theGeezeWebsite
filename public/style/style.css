@@ -58,13 +58,25 @@ nav{
     max-height: 100%;
     display: block;
 }
-#home-section-video{
+#home-section-video {
     width: 100%;
     height: 92vh;
     position: absolute; 
     left: 50%;
     transform: translateX(-50%);
     z-index: 1;
+}
+section > a {
+    z-index: 4;
+    width: 35%;
+    height: 70vh;
+    position: absolute; 
+    display: flex;
+}
+section > a > img {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 .screen{
     background-color: black;

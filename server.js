@@ -1,10 +1,13 @@
+//various npms
 var express = require("express");
 var mongojs = require("mongojs");
 var cheerio = require("cheerio");
 var request = require("request");
 
+//exrpess
 var app = express();
 
+//my database connection to mongoDB
 var databaseUrl = "theGeeze";
 var collections = ["geezeVideos"];
 var db = mongojs(databaseUrl, collections);
@@ -12,8 +15,10 @@ db.on("error", function(error) {
   console.log("Database Error:", error);
 });
 
+//denoting my static front end files for use
 app.use('/geeze', express.static(__dirname + '/public/'));
 
+//when we call for videos we will return the json to the front end
 app.get("/geeze/videos", function(req, res) {
   db.geezeVideos.find({}, function(error, found) {
     if (error) {
@@ -25,14 +30,17 @@ app.get("/geeze/videos", function(req, res) {
   });
 });
 
+//for whatever reason the static folder only worked if i gave it a route
+//this ensures that no matter what i will hit my homepage route of /geeze
 app.get("*", function(req, res) {
   res.redirect('/geeze')
 });
 
+// just a flag for the server so I know when the scrape runs
 console.log("\n***********************************\n" +
             "Grabbing Geeze videos\n" +
             "\n***********************************\n");
-
+// this section runs right away, populated the db with the most recent geeze vids
 request("https://www.youtube.com/channel/UCbpeUIK9EQohTXRxYmbBFXw/videos", function(error, response, html) {
   
   var $ = cheerio.load(html);
@@ -72,6 +80,7 @@ request("https://www.youtube.com/channel/UCbpeUIK9EQohTXRxYmbBFXw/videos", funct
   });
 });
 
+//setting up my server port
 app.listen(3000, function() {
   console.log("App running on port 3000!");
 });
