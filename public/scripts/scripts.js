@@ -51,25 +51,26 @@ function scalingSize() {
 //this is supposed to make the currently viewed youtube video the big on it the grid
 //this is not perfect but it's decent
 function mainVideo(thing) {
-  console.log(thing.attributes[1])
-  //variables
+  console.log('here')
+  //get all the child nodes in the video section
   var nodes = document.getElementById('video-section').childNodes;
-  //handle the classes
+  //hif there is already a main video remove it
   for(var i=0; i<nodes.length; i++) {
     if (nodes[i].classList.contains('main-video')) {
       var parent = document.getElementById('video-section');
       parent.removeChild(nodes[i])
     }
-    const mainVideo = document.createElement('IFRAME');
-
-    document.getElementById('video-section').appendChild(mainVideo)
-
-    mainVideo.classList.add('main-video');
-    mainVideo.setAttribute('src', thing.getAttribute('data-url')+'?autoplay=1')
-    mainVideo.setAttribute('frameborder', "0")
-    mainVideo.setAttribute('allow', "autoplay; encrypted-media")
-    mainVideo.setAttribute('allowfullscreen', true)
   } 
+  //append a new main video to the main section
+  const mainVideo = document.createElement('IFRAME');
+
+  document.getElementById('video-section').appendChild(mainVideo)
+
+  mainVideo.classList.add('main-video');
+  mainVideo.setAttribute('src', thing.getAttribute('data-url')+'?autoplay=1')
+  mainVideo.setAttribute('frameborder', "0")
+  mainVideo.setAttribute('allow', "autoplay; encrypted-media")
+  mainVideo.setAttribute('allowfullscreen', true)
 };
 
 //this makes and ajax call to get the videos from the database
