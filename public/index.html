@@ -10,10 +10,9 @@
 </head>
 <body  onresize="scalingSize()">
     <div id="images">
-        <img class='parallax' src="pictures/parallax/DYUw0LHUQAAZFyl.png" alt="" />
-        <img class='parallax' src="pictures/parallax/Needles Poster for DbyHumans.png" alt="" />
-        <img class='parallax' src="pictures/geezeHeads/sfmafro2.png" alt="" />
+        <!-- images get dynamically loaded here for the parallax backgrund -->
     </div>
+    <!-- header section with custom nav bar -->
     <header id="header">
         <h1 onclick="autoScroll('home-section')">The Geeze</h1>
         <nav>
@@ -24,27 +23,40 @@
         </nav>
 
     </header>
+   
+    <!-- this section handles each of the main body areas -->
     <section class='mainSection' id='home-section'>
-        <a onClick="autoScroll('about-section')"><img src="pictures/interface/geeze-logo.png" /></a>
+        <!-- these are the images that double as links for various portions of the page -->
+        <a id='a1'onClick="autoScroll('about-section')"><img src="pictures/interface/geeze-logo.png" /></a>
+        <a id='a2' onClick="autoScroll('twitch-section')"><img src="pictures/interface/twitchInteractive.png" /></a>
+        <!-- the screen keeps people form interacting with the youtube embeed and doubles up as a way to push it into the bacground -->
         <div class="screen"></div>
         <iframe id='home-section-video' src="https://www.youtube.com/embed/dM9DSbp1P8A?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=dM9DSbp1P8A" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <!-- another pice iwth auto scroll functionality -->
         <div class='scroll-button' data-name="twitch-section" id='twitch-scroll-button'>
             <img src='pictures/interface/scrollImg.png' alt="scroll button">
         </div>
     </section>
+    
     <section class='mainSection' id='twitch-section'>
+        <!-- linking the geeze's twitch here dynamically -->
         <div id="twitch-embed"></div>
+        <!-- another pice iwth auto scroll functionality -->
         <div class='scroll-button' data-name="youtube-section" id='youtube-scroll-button'>
             <img src='pictures/interface/scrollImg.png' alt="scroll button">
         </div>
     </section>
+    
     <section class='mainSection' id='youtube-section'>
-        <!-- <a href="https://www.youtube.com/channel/UCbpeUIK9EQohTXRxYmbBFXw"><h1>Geezer_Works</h1><h6> the official YouTube channel of The_Geeze</h6></a>  -->
-        <div id="video-section"></div>
+        <h1 class="info" id="info">Select a video to watch!</h1>
+        <!-- youtube videos are loaded here in a grid -->
+        <div id="video-section" ></div>
+        <!-- another pice iwth auto scroll functionality -->
         <div class='scroll-button'  data-name="about-section" id='about-scroll-button'>
             <img src='pictures/interface/scrollImg.png' alt="scroll button">
         </div>
     </section>
+    
     <section class='mainSection' id='about-section'>
         <footer>
             <div onClick="autoScroll('home-section')">Return to top of page</div>

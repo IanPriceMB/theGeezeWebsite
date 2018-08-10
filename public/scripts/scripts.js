@@ -10,6 +10,8 @@ window.onload = function() {
   addScroll();
   //get the screen size so that twitch will load properly
   screenSize();
+  //adding my parallax images
+  paraImages();
   //create a new twitch player that is the right size
     new Twitch.Embed("twitch-embed", {
     width: useableWidth,
@@ -48,29 +50,32 @@ function scalingSize() {
   });
 };
 
-//this is supposed to make the currently viewed youtube video the big on it the grid
+//select a video from the grid to play
 //this is not perfect but it's decent
 function mainVideo(thing) {
-  console.log('here')
   //get all the child nodes in the video section
   var nodes = document.getElementById('video-section').childNodes;
   //hif there is already a main video remove it
   for(var i=0; i<nodes.length; i++) {
     if (nodes[i].classList.contains('main-video')) {
       var parent = document.getElementById('video-section');
-      parent.removeChild(nodes[i])
+      parent.removeChild(nodes[i]);
     }
   } 
   //append a new main video to the main section
   const mainVideo = document.createElement('IFRAME');
 
-  document.getElementById('video-section').appendChild(mainVideo)
+  document.getElementById('video-section').appendChild(mainVideo);
 
   mainVideo.classList.add('main-video');
-  mainVideo.setAttribute('src', thing.getAttribute('data-url')+'?autoplay=1')
-  mainVideo.setAttribute('frameborder', "0")
-  mainVideo.setAttribute('allow', "autoplay; encrypted-media")
-  mainVideo.setAttribute('allowfullscreen', true)
+  mainVideo.setAttribute('src', thing.getAttribute('data-url')+'?autoplay=1');
+  mainVideo.setAttribute('frameborder', "0");
+  mainVideo.setAttribute('allow', "autoplay; encrypted-media");
+  mainVideo.setAttribute('allowfullscreen', true);
+
+  if(document.getElementById('info')){
+    document.getElementById('youtube-section').removeChild(document.getElementById('info'))
+  }
 };
 
 //this makes and ajax call to get the videos from the database
@@ -93,19 +98,19 @@ function ajaxCall() {
           const iframe = document.createElement('IFRAME');
           const screen = document.createElement('DIV');
   
-          document.getElementById('video-section').appendChild(iframe)
-          document.getElementById('video-section').appendChild(screen)
+          document.getElementById('video-section').appendChild(iframe);
+          document.getElementById('video-section').appendChild(screen);
  
-          iframe.classList.add('youtube-video')
-          iframe.classList.add('youtube-video'+i)
-          iframe.setAttribute('src', url)
-          iframe.setAttribute('frameborder', "0")
-          iframe.setAttribute('allow', "autoplay; encrypted-media")
+          iframe.classList.add('youtube-video');
+          iframe.classList.add('youtube-video'+i);
+          iframe.setAttribute('src', url);
+          iframe.setAttribute('frameborder', "0");
+          iframe.setAttribute('allow', "autoplay; encrypted-media");
           
-          screen.setAttribute('onclick', 'mainVideo(this)')
-          screen.setAttribute('data-url', url)
-          screen.classList.add('youtube-video-screen')
-          screen.classList.add('youtube-video-screen'+i)
+          screen.setAttribute('onclick', 'mainVideo(this)');
+          screen.setAttribute('data-url', url);
+          screen.classList.add('youtube-video-screen');
+          screen.classList.add('youtube-video-screen'+i);
         }
       }
       else if (xmlhttp.status == 400) {
@@ -122,7 +127,7 @@ function ajaxCall() {
 
 // this is for adding an on click scroll leven to nav items and scroll buttons
 function autoScroll(location) {
-  document.getElementById(location).scrollIntoView({behavior: 'smooth', block: 'start'})
+  document.getElementById(location).scrollIntoView({behavior: 'smooth', block: 'start'});
 };
 
 //this is for adding the auto scroll function to the right elements
@@ -131,10 +136,10 @@ function addScroll() {
   const scrollButtons = document.getElementsByClassName("scroll-button");
   
   for(let i =0; i < navItems.length; i++) {
-    navItems[i].setAttribute('onclick', 'autoScroll("'+navItems[i].attributes[1].nodeValue+'")')
+    navItems[i].setAttribute('onclick', 'autoScroll("'+navItems[i].attributes[1].nodeValue+'")');
   }
   for(let i =0; i < scrollButtons.length; i++) {
-    scrollButtons[i].setAttribute('onclick', 'autoScroll("'+scrollButtons[i].attributes[1].nodeValue+'")')
+    scrollButtons[i].setAttribute('onclick', 'autoScroll("'+scrollButtons[i].attributes[1].nodeValue+'")');
   }
 };
 //fancy scrolling effect
@@ -143,3 +148,12 @@ function parallax() {
   parallax.style.top = -(window.pageYOffset / 4)+ 'px';
 }
 window.addEventListener('scroll', parallax, false);
+function paraImages() {
+  for (let i = 0; i < 46; i++){
+    const paraimage = document.createElement('img');
+
+    paraimage.classList.add('parallax');
+    paraimage.setAttribute('src', 'pictures/parallax/'+i+'.png');
+    document.getElementById('images').appendChild(paraimage);
+  }
+}

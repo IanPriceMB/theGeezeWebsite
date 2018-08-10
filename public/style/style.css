@@ -1,3 +1,4 @@
+/* just a touch of global styling */
 * {
     margin: 0;
     padding: 0;
@@ -8,6 +9,8 @@ html, body{
     color: white;
     background-color: black;
 }
+
+/* setting up the header and the nav bar */
 header {
     z-index: 7;
     position: fixed;
@@ -29,6 +32,8 @@ nav{
     font-size: 1em;
     font-weight: bold;
 }
+
+/* setting up the main containers and the parallax background */
 .mainSection{
     width: 100%;
     height: 92vh;
@@ -37,6 +42,7 @@ nav{
     padding-top: 8vh;
     margin-bottom: 500px;
     background-color: black;
+    filter: drop-shadow(20px 75px 10mm  #000000)
 }
 #images{
     position: fixed;
@@ -44,10 +50,15 @@ nav{
     z-index: 1;
 }
 .parallax {
-    width: 30vw;
-    position: relative;
+    width: 20%;
+    height: 300px;
+    float: left;
+}
+#about-section {
+    margin-bottom: 0;
 }
 
+/* this section crates the extra scroll buttons at the bottom of the page*/
 .scroll-button{
     width: 100px;
     height: 100px;
@@ -69,6 +80,8 @@ nav{
     max-height: 100%;
     display: block;
 }
+
+/* stylizing the home section */
 #home-section-video {
     width: 100%;
     height: 92vh;
@@ -84,6 +97,10 @@ section > a {
     position: absolute; 
     display: flex;
 }
+#a2 {
+    top: 30vh;
+    right: 10vw;
+}
 section > a > img {
     display: block;
     width: 100%;
@@ -97,16 +114,25 @@ section > a > img {
     z-index: 2;
     position: absolute; 
 }
-#about-section {
-    margin-bottom: 0;
-}
+
+/* this section is for stylizing the youtube section of the page */
+/* my first attempt at css girds :D */
 #youtube-section > a {
     text-decoration: none;
 }
 #youtube-section > a > h1, h6{
     margin-left: 5%;
 }
+.info {
+    float: left;
+    padding: 44vh 0;
+    width: 70%;
+    text-align: center;
+    z-index: 1;
+    position: absolute;
+}
 #video-section {
+    position: absolute;
     display: grid;
     width: 90%;
     height: 92vh;
@@ -114,7 +140,12 @@ section > a > img {
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(4, 1fr);
     grid-gap: 10px;
+    z-index: 2;
+    left: 50%;
+    transform: translateX(-50%);
 }
+
+/* i had to do this all by hand to avoid a crap ton of hover problems but such is life */
 .youtube-video{
     width: 100%;
     height: 100%;
