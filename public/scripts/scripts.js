@@ -21,7 +21,6 @@ window.onload = function() {
   });
   //getting my youtube videos
   ajaxCall();  
-
 }
 
 //handle the math for dynamically siznig twitch feed
@@ -36,6 +35,7 @@ function screenSize() {
 
 // tied to body in html
 //this will resize twitch feed when the window is resized
+//as unfortunately twitch doesn't automatically resize
 function scalingSize() {
   
   document.getElementById('twitch-embed').innerHTML = "";
@@ -51,7 +51,6 @@ function scalingSize() {
 };
 
 //select a video from the grid to play
-//this is not perfect but it's decent
 function mainVideo(thing) {
   //get all the child nodes in the video section
   var nodes = document.getElementById('video-section').childNodes;
@@ -125,7 +124,7 @@ function ajaxCall() {
   xmlhttp.send();
 };
 
-// this is for adding an on click scroll leven to nav items and scroll buttons
+// this is for shortening the quick scroll function since i use it so much
 function autoScroll(location) {
   document.getElementById(location).scrollIntoView({behavior: 'smooth', block: 'start'});
 };
@@ -148,6 +147,8 @@ function parallax() {
   parallax.style.top = -(window.pageYOffset / 4)+ 'px';
 }
 window.addEventListener('scroll', parallax, false);
+
+//this will dynamically loop through all my images and make a collage of them in the background of my site
 function paraImages() {
   for (let i = 0; i < 46; i++){
     const paraimage = document.createElement('img');

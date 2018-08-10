@@ -9,9 +9,11 @@
     <title>The Geeze</title>
 </head>
 <body  onresize="scalingSize()">
+    
     <div id="images">
         <!-- images get dynamically loaded here for the parallax backgrund -->
     </div>
+
     <!-- header section with custom nav bar -->
     <header id="header">
         <h1 onclick="autoScroll('home-section')">The Geeze</h1>
@@ -59,10 +61,17 @@
     
     <section class='mainSection' id='about-section'>
         <footer>
-            <div onClick="autoScroll('home-section')">Return to top of page</div>
+            <!-- this is a quick route back to the top of the page -->
+            <div onClick="autoScroll('home-section')"><h1>Return to the top of the page</h1></div>
+            <!-- social media links -->
+            <a href="https://www.twitch.tv/the_geeze" target="_blank"><img src="pictures/interface/twitch.png" alt="#" /></a>
+            <a href="https://www.youtube.com/channel/UCbpeUIK9EQohTXRxYmbBFXw" target="_blank"><img src="pictures/interface/youtube.png" alt="#" /></a>
+            <a href="https://twitter.com/GeezeStreams" target="_blank"><img src="pictures/interface/twitter.png" alt="#" /></a>
         </footer>
     </section>
+    <!-- scripts requrie for twitch embed as well as my front end javascript -->
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
     <script src="scripts/scripts.js" ></script>
+    
 </body>
 </html>
