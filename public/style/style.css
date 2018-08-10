@@ -242,7 +242,7 @@ footer{
 footer > div {
     float: right;
     cursor: pointer;
-    margin-top: 5vh;
+    margin: 5vh 3vw;
 }
 footer > a {
     width: 10%;
