@@ -235,9 +235,22 @@ section > a > img {
 }
 
 /* this is for the aobut section */
+#about-section > h2{
+    margin-left: 20px;
+}
+.part1{
+    width: 90%;
+    margin: 0 auto;
+    height: 70vh;
+    overflow: auto;
+}
+.part1::-webkit-scrollbar { 
+    display: none; 
+}
 footer{
     position: absolute;
     bottom: 0;
+    background-color: black;
 }
 footer > div {
     float: right;
