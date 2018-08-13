@@ -9,7 +9,7 @@ var PORT = process.env.PORT || 8080
 var app = express();
 
 //my database connection to mongoDB
-var databaseUrl = "theGeeze";
+var databaseUrl = process.env.MONGODB_URI || "theGeeze";
 var collections = ["geezeVideos"];
 var db = mongojs(databaseUrl, collections);
 db.on("error", function(error) {
