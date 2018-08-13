@@ -5,6 +5,7 @@ var cheerio = require("cheerio");
 var request = require("request");
 
 //exrpess
+var PORT = process.env.PORT || 8080
 var app = express();
 
 //my database connection to mongoDB
@@ -81,6 +82,6 @@ request("https://www.youtube.com/channel/UCbpeUIK9EQohTXRxYmbBFXw/videos", funct
 });
 
 //setting up my server port
-app.listen(3000, function() {
+app.listen(PORT, function() {
   console.log("App running on port 3000!");
 });
